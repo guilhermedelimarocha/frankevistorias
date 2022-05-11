@@ -17,9 +17,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.frankevistorias.api.endereco.EnderecoEntity;
 import com.frankevistorias.api.imobiliaria.ImobiliariaEntity;
 import com.frankevistorias.api.status.StatusEntity;
-import com.frankevistorias.api.uriAssets.AssetsEntity;
 
 import lombok.Data;
+
+/**
+ * @author Ilson Junior
+ * @since 11/05/2022
+ */
+
 
 @Data
 @Entity

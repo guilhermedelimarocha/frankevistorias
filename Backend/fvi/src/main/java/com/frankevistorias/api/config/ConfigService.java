@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author Ilson Junior
+ * @since 11/05/2022
+ */
+
 @Service
 public class ConfigService {
 

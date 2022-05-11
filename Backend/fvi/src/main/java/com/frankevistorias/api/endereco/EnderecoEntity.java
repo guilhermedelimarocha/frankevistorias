@@ -14,6 +14,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
+/**
+ * @author Ilson Junior
+ * @since 11/05/2022
+ */
 
 @Data
 @Entity
