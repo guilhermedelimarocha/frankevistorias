@@ -36,5 +36,17 @@ public class AtendimentoService {
 		atendimentoRepository.findById(id).orElseThrow(() -> new NotFoundException());
 		atendimentoRepository.deleteById(id);
 	}
+
+	public List<AtendimentoEntity> findByReferenciaImovel(String referenciaImovel){
+		return atendimentoRepository.findByReferenciaImovel(referenciaImovel);
+	}
+
+	public List<AtendimentoEntity> findByStatusEntityId(Long statusEntityId){
+		return atendimentoRepository.findByStatusEntityId(statusEntityId);
+	}
+
+	public List<AtendimentoEntity> findByResponsavel(String responsavel){
+		return atendimentoRepository.findByResponsavel(responsavel);
+	}
     
 }

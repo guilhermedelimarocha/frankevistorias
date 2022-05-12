@@ -71,5 +71,20 @@ public class AtendimentoController {
 
         return erros;
     }
+
+    @GetMapping("/findByReferenciaImovel/{referenciaImovel}")
+    public ResponseEntity<List<AtendimentoEntity>> findByReferenciaImovel(@PathVariable("referenciaImovel") String referenciaImovel) {
+        return ResponseEntity.ok().body(atendimentoService.findAll());
+    }
+
+    @GetMapping("/findByStatusEntityId/{statusEntityId}")
+    public ResponseEntity<List<AtendimentoEntity>> findByStatusEntityId(@PathVariable("statusEntityId") Long statusEntityId) {
+        return ResponseEntity.ok().body(atendimentoService.findAll());
+    }
+
+    @GetMapping("/findByResponsavel/{responsavel}")
+    public ResponseEntity<List<AtendimentoEntity>> findByResponsavel(@PathVariable("responsavel") String responsavel) {
+        return ResponseEntity.ok().body(atendimentoService.findAll());
+    }
     
 }
