@@ -12,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +49,12 @@ public class EnderecoController {
 	@GetMapping("/endereco")
     public ResponseEntity<List<EnderecoEntity>> findAll() {
         return ResponseEntity.ok().body(enderecoService.findAll());
+    }
+
+    @DeleteMapping("/endereco/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
+		enderecoService.delete(id);
+        return ResponseEntity.ok("Deleted");
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

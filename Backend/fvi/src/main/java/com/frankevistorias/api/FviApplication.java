@@ -1,6 +1,5 @@
 package com.frankevistorias.api;
 
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -10,6 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+/**
+ * @author Ilson Junior
+ * @since 11/05/2022
+ */
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 @EnableWebMvc

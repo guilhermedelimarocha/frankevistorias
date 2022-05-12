@@ -23,6 +23,11 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.Data;
 
+/**
+ * @author Ilson Junior
+ * @since 11/05/2022
+ */
+
 @Data
 @Entity
 @Table(name = "usuario")

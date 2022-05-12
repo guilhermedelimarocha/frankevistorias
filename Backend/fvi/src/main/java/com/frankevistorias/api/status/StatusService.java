@@ -31,5 +31,10 @@ public class StatusService {
 	public List<StatusEntity> findAll(){
 		return statusRepository.findAll();
 	}
+
+	public void delete(Long id) throws NotFoundException {
+		statusRepository.findById(id).orElseThrow(() -> new NotFoundException());
+		statusRepository.deleteById(id);
+	}
     
 }

@@ -31,5 +31,10 @@ public class AtendimentoService {
 	public List<AtendimentoEntity> findAll(){
 		return atendimentoRepository.findAll();
 	}
+
+	public void delete(Long id) throws NotFoundException {
+		atendimentoRepository.findById(id).orElseThrow(() -> new NotFoundException());
+		atendimentoRepository.deleteById(id);
+	}
     
 }

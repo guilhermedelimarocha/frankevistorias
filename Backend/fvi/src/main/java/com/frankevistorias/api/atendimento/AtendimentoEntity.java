@@ -25,7 +25,6 @@ import lombok.Data;
  * @since 11/05/2022
  */
 
-
 @Data
 @Entity
 @Table(name = "atendimento")

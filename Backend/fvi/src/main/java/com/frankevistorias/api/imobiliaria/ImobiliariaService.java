@@ -31,5 +31,10 @@ public class ImobiliariaService {
 	public List<ImobiliariaEntity> findAll(){
 		return imobiliariaRepository.findAll();
 	}
+
+	public void delete(Long id) throws NotFoundException {
+		imobiliariaRepository.findById(id).orElseThrow(() -> new NotFoundException());
+		imobiliariaRepository.deleteById(id);
+	}
     
 }

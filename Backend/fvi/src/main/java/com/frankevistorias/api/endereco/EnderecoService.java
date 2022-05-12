@@ -31,5 +31,10 @@ public class EnderecoService {
 	public List<EnderecoEntity> findAll(){
 		return enderecoRepository.findAll();
 	}
+
+	public void delete(Long id) throws NotFoundException {
+		enderecoRepository.findById(id).orElseThrow(() -> new NotFoundException());
+		enderecoRepository.deleteById(id);
+	}
     
 }

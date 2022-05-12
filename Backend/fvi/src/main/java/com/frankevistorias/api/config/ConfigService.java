@@ -31,5 +31,10 @@ public class ConfigService {
 	public List<ConfigEntity> findAll(){
 		return configRepository.findAll();
 	}
+
+	public void delete(Long id) throws NotFoundException {
+		configRepository.findById(id).orElseThrow(() -> new NotFoundException());
+		configRepository.deleteById(id);
+	}
     
 }
