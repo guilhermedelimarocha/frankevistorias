@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value="/fvi")
+@RequestMapping(value="/usuario")
 public class UsuarioController {
 
     @Autowired
@@ -40,7 +40,7 @@ public class UsuarioController {
     private PasswordEncoder encoder;
 
 
-	@PostMapping("/usuario")
+	@PostMapping("/save")
     public ResponseEntity<Long> save(@RequestBody  @Valid UsuarioEntity usuarioEntity) throws NotFoundException{
         Optional<UsuarioEntity> usuario = usuarioService.findByEmail(usuarioEntity.getEmail());
         if(usuario.isPresent()){
@@ -50,7 +50,7 @@ public class UsuarioController {
 
     }
 
-	@PutMapping("/usuario")
+	@PutMapping("/update")
     public ResponseEntity<Long> update(@RequestBody UsuarioEntity usuarioEntity) throws NotFoundException{
         return ResponseEntity.ok().body(usuarioService.save(usuarioEntity));
     }
@@ -71,12 +71,12 @@ public class UsuarioController {
         return ResponseEntity.status(status).body(valid);
     }
 
-    @GetMapping("/usuarioLogado/{id}")
+    @GetMapping("/findByUsuarioLogado/{id}")
     public ResponseEntity<UsuarioDTO> findByUsuarioLogado(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(usuarioService.findUsuarioLogado(id));
     }
 
-    @DeleteMapping("/usuario/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
 		usuarioService.delete(id);
         return ResponseEntity.ok("Deleted");

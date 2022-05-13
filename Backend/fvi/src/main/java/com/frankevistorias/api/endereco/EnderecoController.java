@@ -29,29 +29,29 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value="/fvi")
+@RequestMapping(value="/endereco")
 public class EnderecoController {
 
     @Autowired
 	private EnderecoService enderecoService;
 
-	@PostMapping("/endereco")
+	@PostMapping("/save")
     public ResponseEntity<Long> save(@RequestBody @Valid EnderecoEntity enderecoEntity) throws NotFoundException{
 		return ResponseEntity.ok().body(enderecoService.save(enderecoEntity));
 
     }
 
-	@PutMapping("/endereco")
+	@PutMapping("/update")
     public ResponseEntity<Long> update(@RequestBody EnderecoEntity enderecoEntity) throws NotFoundException{
         return ResponseEntity.ok().body(enderecoService.save(enderecoEntity));
     }
 
-	@GetMapping("/endereco")
+	@GetMapping("/findAll")
     public ResponseEntity<List<EnderecoEntity>> findAll() {
         return ResponseEntity.ok().body(enderecoService.findAll());
     }
 
-    @DeleteMapping("/endereco/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
 		enderecoService.delete(id);
         return ResponseEntity.ok("Deleted");

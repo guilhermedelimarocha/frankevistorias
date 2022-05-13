@@ -29,29 +29,29 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value="/fvi")
+@RequestMapping(value="/assets")
 public class AssetsController {
 
     @Autowired
 	private AssetsService assetsService;
 
-	@PostMapping("/assets")
+	@PostMapping("/save")
     public ResponseEntity<Long> save(@RequestBody @Valid AssetsEntity assetsEntity) throws NotFoundException{
 		return ResponseEntity.ok().body(assetsService.save(assetsEntity));
 
     }
 
-	@PutMapping("/assets")
+	@PutMapping("/update")
     public ResponseEntity<Long> update(@RequestBody AssetsEntity assetsEntity) throws NotFoundException{
         return ResponseEntity.ok().body(assetsService.save(assetsEntity));
     }
 
-	@GetMapping("/assets")
+	@GetMapping("/findAll")
     public ResponseEntity<List<AssetsEntity>> findAll() {
         return ResponseEntity.ok().body(assetsService.findAll());
     }
 
-    @DeleteMapping("/assets/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
 		assetsService.delete(id);
         return ResponseEntity.ok("Deleted");

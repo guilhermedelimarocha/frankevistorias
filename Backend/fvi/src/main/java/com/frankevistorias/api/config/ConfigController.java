@@ -29,29 +29,29 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value="/fvi")
+@RequestMapping(value="/config")
 public class ConfigController {
 
     @Autowired
 	private ConfigService configService;
 
-	@PostMapping("/config")
+	@PostMapping("/save")
     public ResponseEntity<Long> save(@RequestBody @Valid ConfigEntity configEntity) throws NotFoundException{
 		return ResponseEntity.ok().body(configService.save(configEntity));
 
     }
 
-	@PutMapping("/config")
+	@PutMapping("/update")
     public ResponseEntity<Long> update(@RequestBody ConfigEntity configEntity) throws NotFoundException{
         return ResponseEntity.ok().body(configService.save(configEntity));
     }
 
-	@GetMapping("/config")
+	@GetMapping("/findAll")
     public ResponseEntity<List<ConfigEntity>> findAll() {
         return ResponseEntity.ok().body(configService.findAll());
     }
 
-    @DeleteMapping("/config/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
 		configService.delete(id);
         return ResponseEntity.ok("Deleted");

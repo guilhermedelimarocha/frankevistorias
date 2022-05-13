@@ -29,29 +29,29 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value="/fvi")
+@RequestMapping(value="/atendimento")
 public class AtendimentoController {
 
     @Autowired
 	private AtendimentoService atendimentoService;
 
-	@PostMapping("/atendimento")
+	@PostMapping("/save")
     public ResponseEntity<Long> save(@RequestBody @Valid AtendimentoEntity atendimentoEntity) throws NotFoundException{
 		return ResponseEntity.ok().body(atendimentoService.save(atendimentoEntity));
 
     }
 
-	@PutMapping("/atendimento")
+	@PutMapping("/update")
     public ResponseEntity<Long> update(@RequestBody AtendimentoEntity atendimentoEntity) throws NotFoundException{
         return ResponseEntity.ok().body(atendimentoService.save(atendimentoEntity));
     }
 
-	@GetMapping("/atendimento")
+	@GetMapping("/findAll")
     public ResponseEntity<List<AtendimentoEntity>> findAll() {
         return ResponseEntity.ok().body(atendimentoService.findAll());
     }
 
-    @DeleteMapping("/atendimento/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
 		atendimentoService.delete(id);
         return ResponseEntity.ok("Deleted");

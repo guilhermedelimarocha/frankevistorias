@@ -30,29 +30,29 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value="/fvi")
+@RequestMapping(value="/imobiliaria")
 public class ImobiliariaController {
 
     @Autowired
 	private ImobiliariaService imobiliariaService;
 
-	@PostMapping("/imobiliaria")
+	@PostMapping("/save")
     public ResponseEntity<Long> save(@RequestBody @Valid ImobiliariaEntity imobiliariaEntity) throws NotFoundException{
 		return ResponseEntity.ok().body(imobiliariaService.save(imobiliariaEntity));
 
     }
 
-	@PutMapping("/imobiliaria")
+	@PutMapping("/update")
     public ResponseEntity<Long> update(@RequestBody ImobiliariaEntity imobiliariaEntity) throws NotFoundException{
         return ResponseEntity.ok().body(imobiliariaService.save(imobiliariaEntity));
     }
 
-	@GetMapping("/imobiliaria")
+	@GetMapping("/findAll")
     public ResponseEntity<List<ImobiliariaEntity>> findAll() {
         return ResponseEntity.ok().body(imobiliariaService.findAll());
     }
 
-    @DeleteMapping("/imobiliaria/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
 		imobiliariaService.delete(id);
         return ResponseEntity.ok("Deleted");

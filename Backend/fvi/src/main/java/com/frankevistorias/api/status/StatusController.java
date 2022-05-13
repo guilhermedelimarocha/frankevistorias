@@ -29,29 +29,29 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value="/fvi")
+@RequestMapping(value="/status")
 public class StatusController {
 
     @Autowired
 	private StatusService statusService;
 
-	@PostMapping("/status")
+	@PostMapping("/save")
     public ResponseEntity<Long> save(@RequestBody @Valid StatusEntity statusEntity) throws NotFoundException{
 		return ResponseEntity.ok().body(statusService.save(statusEntity));
 
     }
 
-	@PutMapping("/status")
+	@PutMapping("/update")
     public ResponseEntity<Long> update(@RequestBody StatusEntity statusEntity) throws NotFoundException{
         return ResponseEntity.ok().body(statusService.save(statusEntity));
     }
 
-	@GetMapping("/status")
+	@GetMapping("/findAll")
     public ResponseEntity<List<StatusEntity>> findAll() {
         return ResponseEntity.ok().body(statusService.findAll());
     }
 
-    @DeleteMapping("/status/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
 		statusService.delete(id);
         return ResponseEntity.ok("Deleted");
