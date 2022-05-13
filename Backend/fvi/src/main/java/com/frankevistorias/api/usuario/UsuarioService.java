@@ -40,5 +40,10 @@ public class UsuarioService {
 		usuarioRepository.findById(id).orElseThrow(() -> new NotFoundException());
 		usuarioRepository.deleteById(id);
 	}
+
+	public UsuarioDTO findUsuarioLogado(Long id){
+		UsuarioDTO userLogado = new UsuarioDTO(usuarioRepository.findById(id).get());
+		return userLogado ;
+	}
     
 }

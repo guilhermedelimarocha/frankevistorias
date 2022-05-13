@@ -71,6 +71,11 @@ public class UsuarioController {
         return ResponseEntity.status(status).body(valid);
     }
 
+    @GetMapping("/usuarioLogado/{id}")
+    public ResponseEntity<UsuarioDTO> findByUsuarioLogado(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(usuarioService.findUsuarioLogado(id));
+    }
+
     @DeleteMapping("/usuario/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
 		usuarioService.delete(id);
