@@ -74,17 +74,17 @@ public class AtendimentoController {
 
     @GetMapping("/findByReferenciaImovel/{referenciaImovel}")
     public ResponseEntity<List<AtendimentoEntity>> findByReferenciaImovel(@PathVariable("referenciaImovel") String referenciaImovel) {
-        return ResponseEntity.ok().body(atendimentoService.findAll());
+        return ResponseEntity.ok().body(atendimentoService.findByReferenciaImovel(referenciaImovel));
     }
 
     @GetMapping("/findByStatusEntityId/{statusEntityId}")
     public ResponseEntity<List<AtendimentoEntity>> findByStatusEntityId(@PathVariable("statusEntityId") Long statusEntityId) {
-        return ResponseEntity.ok().body(atendimentoService.findAll());
+        return ResponseEntity.ok().body(atendimentoService.findByStatusEntityId(statusEntityId));
     }
 
     @GetMapping("/findByResponsavel/{responsavel}")
     public ResponseEntity<List<AtendimentoEntity>> findByResponsavel(@PathVariable("responsavel") String responsavel) {
-        return ResponseEntity.ok().body(atendimentoService.findAll());
+        return ResponseEntity.ok().body(atendimentoService.findByResponsavel(responsavel));
     }
     
 }
