@@ -1,6 +1,7 @@
 package com.frankevistorias.api.usuario;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -87,5 +88,13 @@ public class UsuarioEntity implements Serializable{
     @JsonProperty("idEndereco")
     @ManyToOne()
     private EnderecoEntity enderecoEntity;
+    
+	@Column(name = "dh_registro")
+	@JsonProperty("dh_registro")
+	private Date dh_registro;
+    
+	@Column(name = "dh_alteracao")
+	@JsonProperty("dh_alteracao")
+	private Date dh_alteracao;
 
 }

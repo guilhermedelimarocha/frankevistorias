@@ -1,6 +1,7 @@
 package com.frankevistorias.api.endereco;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -27,11 +28,17 @@ public class EnderecoService {
 
 		return enderecoEntity.getId();
 	}
-
+	public List<EnderecoEntity> findByCep(String cep){
+		return enderecoRepository.findByCep(cep);
+	}
+	
+	public Optional<EnderecoEntity> findById(Long id){
+		return enderecoRepository.findById(id);
+	}
+	
 	public List<EnderecoEntity> findAll(){
 		return enderecoRepository.findAll();
 	}
-
 	public void delete(Long id) throws NotFoundException {
 		enderecoRepository.findById(id).orElseThrow(() -> new NotFoundException());
 		enderecoRepository.deleteById(id);

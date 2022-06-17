@@ -1,7 +1,12 @@
-package com.frankevistorias.api.config;
+package com.frankevistorias.api.pleno;
 
 import java.io.Serializable;
 import java.util.Date;
+
+/*
+ * @author Guilherme Rocha
+ * @since 13/06/2022
+ */ 
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,30 +14,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-/**
- * @author Ilson Junior
- * @since 11/05/2022
- */
-
 @Data
 @Entity
-@Table(name="config")
-public class ConfigEntity implements Serializable {
-    
+@Table(name="plenoIntegration")
+public class PlenoEntity implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	@JsonProperty("id")
-	private Long	id;
-
-    @Column(name = "constante")
+	private Long id;
+	
+	@Column(name = "constante")
 	@JsonProperty("constante")
 	private String constante;
 
@@ -44,9 +45,20 @@ public class ConfigEntity implements Serializable {
 	@JsonProperty("ativo")
 	private Boolean ativo;
 	
-	@Column(name = "nivel")
-	@JsonProperty("nivel")
-	private Long nivel;
+	@NotBlank(message = "usuario vazia")
+	@Column(name = "usuario")
+	@JsonProperty("usuario")
+	private String usuario;
+	
+	@NotBlank(message = "token vazio")
+	@Column(name="token")
+	@JsonProperty("token")
+	private String token;
+	
+	@NotBlank(message = "senha vazia")
+	@Column(name = "senha")
+	@JsonProperty("senha")
+	private String senha;
 	
 	@Column(name = "dh_registro")
 	@JsonProperty("dh_registro")
@@ -55,5 +67,6 @@ public class ConfigEntity implements Serializable {
 	@Column(name = "dh_alteracao")
 	@JsonProperty("dh_alteracao")
 	private Date dh_alteracao;
-    
+	
+	
 }

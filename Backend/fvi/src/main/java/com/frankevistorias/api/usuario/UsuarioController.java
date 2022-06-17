@@ -50,7 +50,7 @@ public class UsuarioController {
 
     }
 
-	@PutMapping("/update")
+	@PutMapping("/update") 	
     public ResponseEntity<Long> update(@RequestBody UsuarioEntity usuarioEntity) throws NotFoundException{
         return ResponseEntity.ok().body(usuarioService.save(usuarioEntity));
     }
@@ -74,6 +74,10 @@ public class UsuarioController {
     @GetMapping("/findByUsuarioLogado/{id}")
     public ResponseEntity<UsuarioDTO> findByUsuarioLogado(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(usuarioService.findUsuarioLogado(id));
+    }
+    @GetMapping("/findByEmail/{email}")
+    public ResponseEntity<Optional<UsuarioEntity>> findUsuarioByEmail(@PathVariable("email") String email) {
+        return ResponseEntity.ok().body(usuarioService.findByEmail(email));
     }
 
     @DeleteMapping("/delete/{id}")

@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.frankevistorias.api.atendimento.AtendimentoEntity;
+import com.frankevistorias.api.usuario.UsuarioDTO;
+
 /**
  * @author Ilson Junior
  * @since 11/05/2022
@@ -50,7 +53,11 @@ public class AssetsController {
     public ResponseEntity<List<AssetsEntity>> findAll() {
         return ResponseEntity.ok().body(assetsService.findAll());
     }
-
+	/* @GetMapping("/findByIdUsuario/{idUsuario}")
+    public ResponseEntity<AssetsDTO> findIdUsuario(@PathVariable("idUsuario") Long idUsuario) {
+        return ResponseEntity.ok().body(assetsService.findIdUsuario(idUsuario));
+    } */
+	
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
 		assetsService.delete(id);

@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.frankevistorias.api.atendimento.AtendimentoEntity;
+import com.frankevistorias.api.usuario.UsuarioDTO;
+
 /**
  * @author Ilson Junior
  * @since 11/05/2022
@@ -31,10 +34,15 @@ public class AssetsService {
 	public List<AssetsEntity> findAll(){
 		return assetsRepository.findAll();
 	}
-
+	
 	public void delete(Long id) throws NotFoundException {
 		assetsRepository.findById(id).orElseThrow(() -> new NotFoundException());
 		assetsRepository.deleteById(id);
 	}
-    
+	/*
+	public AssetsDTO findIdUsuario(Long idUsuario){
+		AssetsDTO assetsUsuario = new AssetsDTO(assetsRepository.findIdUsuario(idUsuario).get());
+		return assetsUsuario ;
+	}
+    */
 }

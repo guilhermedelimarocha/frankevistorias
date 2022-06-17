@@ -25,7 +25,7 @@ public class UsuarioService {
 	}
 
 	public Long save(UsuarioEntity usuarioEntity) throws NotFoundException{
-
+		
 		usuarioEntity.setSenha(encoder.encode(usuarioEntity.getSenha()));
 		usuarioEntity = usuarioRepository.save(usuarioEntity);
 

@@ -3,6 +3,7 @@ package com.frankevistorias.api.imobiliaria;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.frankevistorias.api.atendimento.AtendimentoEntity;
 
 /**
  * @author Ilson Junior
@@ -50,6 +53,11 @@ public class ImobiliariaController {
 	@GetMapping("/findAll")
     public ResponseEntity<List<ImobiliariaEntity>> findAll() {
         return ResponseEntity.ok().body(imobiliariaService.findAll());
+    }
+	
+	@GetMapping("/findById/{id}")
+    public ResponseEntity<Optional<ImobiliariaEntity>> findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(imobiliariaService.findById(id));
     }
 
     @DeleteMapping("/delete/{id}")

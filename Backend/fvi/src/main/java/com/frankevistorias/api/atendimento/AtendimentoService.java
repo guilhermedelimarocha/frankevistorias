@@ -1,6 +1,7 @@
 package com.frankevistorias.api.atendimento;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
@@ -44,9 +45,14 @@ public class AtendimentoService {
 	public List<AtendimentoEntity> findByStatusEntityId(Long statusEntityId){
 		return atendimentoRepository.findByStatusEntityId(statusEntityId);
 	}
-
+	public Optional<AtendimentoEntity> findById(Long id){
+		return atendimentoRepository.findById(id);
+	}
 	public List<AtendimentoEntity> findByResponsavel(String responsavel){
 		return atendimentoRepository.findByResponsavel(responsavel);
+	}
+	public List<AtendimentoEntity> findByImobiliariaEntityId(Long imobiliariaEntityId){
+		return atendimentoRepository.findByImobiliariaEntityId(imobiliariaEntityId);
 	}
     
 }

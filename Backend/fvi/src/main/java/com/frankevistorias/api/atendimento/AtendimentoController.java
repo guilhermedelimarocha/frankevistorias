@@ -3,6 +3,7 @@ package com.frankevistorias.api.atendimento;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.frankevistorias.api.usuario.UsuarioDTO;
 
 /**
  * @author Ilson Junior
@@ -50,6 +53,11 @@ public class AtendimentoController {
     public ResponseEntity<List<AtendimentoEntity>> findAll() {
         return ResponseEntity.ok().body(atendimentoService.findAll());
     }
+	
+	@GetMapping("/findById/{id}")
+    public ResponseEntity<Optional<AtendimentoEntity>> findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(atendimentoService.findById(id));
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
@@ -74,17 +82,21 @@ public class AtendimentoController {
 
     @GetMapping("/findByReferenciaImovel/{referenciaImovel}")
     public ResponseEntity<List<AtendimentoEntity>> findByReferenciaImovel(@PathVariable("referenciaImovel") String referenciaImovel) {
-        return ResponseEntity.ok().body(atendimentoService.findAll());
+        return ResponseEntity.ok().body(atendimentoService.findByReferenciaImovel(referenciaImovel));
     }
 
     @GetMapping("/findByStatusEntityId/{statusEntityId}")
     public ResponseEntity<List<AtendimentoEntity>> findByStatusEntityId(@PathVariable("statusEntityId") Long statusEntityId) {
-        return ResponseEntity.ok().body(atendimentoService.findAll());
+        return ResponseEntity.ok().body(atendimentoService.findByStatusEntityId(statusEntityId));
     }
 
     @GetMapping("/findByResponsavel/{responsavel}")
     public ResponseEntity<List<AtendimentoEntity>> findByResponsavel(@PathVariable("responsavel") String responsavel) {
-        return ResponseEntity.ok().body(atendimentoService.findAll());
+        return ResponseEntity.ok().body(atendimentoService.findByResponsavel(responsavel));
+    }
+    @GetMapping("/findByImobiliariaEntityId/{idImobiliaria}")
+    public ResponseEntity<List<AtendimentoEntity>> findByImobiliariaEntityId(@PathVariable("idImobiliaria") Long imobiliariaEntityId) {
+        return ResponseEntity.ok().body(atendimentoService.findByStatusEntityId(imobiliariaEntityId));
     }
     
 }
