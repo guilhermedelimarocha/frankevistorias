@@ -13,8 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +25,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Ilson Junior
+ * @since 11/05/2022
+ */
+
 @RestController
-@RequestMapping(value="/fvi")
+@RequestMapping(value="/usuario")
 public class UsuarioController {
 
     @Autowired
@@ -33,7 +40,7 @@ public class UsuarioController {
     private PasswordEncoder encoder;
 
 
-	@PostMapping("/usuario")
+	@PostMapping("/save")
     public ResponseEntity<Long> save(@RequestBody  @Valid UsuarioEntity usuarioEntity) throws NotFoundException{
         Optional<UsuarioEntity> usuario = usuarioService.findByEmail(usuarioEntity.getEmail());
         if(usuario.isPresent()){
@@ -43,7 +50,7 @@ public class UsuarioController {
 
     }
 
-	@PutMapping("/usuario")
+	@PutMapping("/update") 	
     public ResponseEntity<Long> update(@RequestBody UsuarioEntity usuarioEntity) throws NotFoundException{
         return ResponseEntity.ok().body(usuarioService.save(usuarioEntity));
     }
@@ -62,6 +69,21 @@ public class UsuarioController {
 
         HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
         return ResponseEntity.status(status).body(valid);
+    }
+
+    @GetMapping("/findByUsuarioLogado/{id}")
+    public ResponseEntity<UsuarioDTO> findByUsuarioLogado(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(usuarioService.findUsuarioLogado(id));
+    }
+    @GetMapping("/findByEmail/{email}")
+    public ResponseEntity<Optional<UsuarioEntity>> findUsuarioByEmail(@PathVariable("email") String email) {
+        return ResponseEntity.ok().body(usuarioService.findByEmail(email));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
+		usuarioService.delete(id);
+        return ResponseEntity.ok("Deleted");
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

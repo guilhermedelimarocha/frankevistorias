@@ -3,6 +3,7 @@ package com.frankevistorias.api.endereco;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -12,8 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,27 +24,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.frankevistorias.api.atendimento.AtendimentoEntity;
+import com.frankevistorias.api.imobiliaria.ImobiliariaEntity;
+
+/**
+ * @author Ilson Junior
+ * @since 11/05/2022
+ */
+
 @RestController
-@RequestMapping(value="/fvi")
+@RequestMapping(value="/endereco")
 public class EnderecoController {
 
     @Autowired
 	private EnderecoService enderecoService;
 
-	@PostMapping("/endereco")
+	@PostMapping("/save")
     public ResponseEntity<Long> save(@RequestBody @Valid EnderecoEntity enderecoEntity) throws NotFoundException{
 		return ResponseEntity.ok().body(enderecoService.save(enderecoEntity));
-
     }
 
-	@PutMapping("/endereco")
+	@PutMapping("/update")
     public ResponseEntity<Long> update(@RequestBody EnderecoEntity enderecoEntity) throws NotFoundException{
         return ResponseEntity.ok().body(enderecoService.save(enderecoEntity));
     }
 
-	@GetMapping("/endereco")
+	@GetMapping("/findAll")
     public ResponseEntity<List<EnderecoEntity>> findAll() {
         return ResponseEntity.ok().body(enderecoService.findAll());
+    }
+	
+	@GetMapping("/findByCep/{cep}")
+    public ResponseEntity<List<EnderecoEntity>> findByCep(@PathVariable("cep") String cep) {
+        return ResponseEntity.ok().body(enderecoService.findByCep(cep));
+    }
+	@GetMapping("/findById/{id}")
+    public ResponseEntity<Optional<EnderecoEntity>> findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(enderecoService.findById(id));
+    }
+	
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
+		enderecoService.delete(id);
+        return ResponseEntity.ok("Deleted");
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

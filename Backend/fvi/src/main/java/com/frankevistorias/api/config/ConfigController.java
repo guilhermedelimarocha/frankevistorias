@@ -12,8 +12,10 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,27 +23,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Ilson Junior
+ * @since 11/05/2022
+ */
+
 @RestController
-@RequestMapping(value="/fvi")
+@RequestMapping(value="/config")
 public class ConfigController {
 
     @Autowired
 	private ConfigService configService;
 
-	@PostMapping("/config")
+	@PostMapping("/save")
     public ResponseEntity<Long> save(@RequestBody @Valid ConfigEntity configEntity) throws NotFoundException{
 		return ResponseEntity.ok().body(configService.save(configEntity));
 
     }
 
-	@PutMapping("/config")
+	@PutMapping("/update")
     public ResponseEntity<Long> update(@RequestBody ConfigEntity configEntity) throws NotFoundException{
         return ResponseEntity.ok().body(configService.save(configEntity));
     }
 
-	@GetMapping("/config")
+	@GetMapping("/findAll")
     public ResponseEntity<List<ConfigEntity>> findAll() {
         return ResponseEntity.ok().body(configService.findAll());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) throws NotFoundException {
+		configService.delete(id);
+        return ResponseEntity.ok("Deleted");
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
